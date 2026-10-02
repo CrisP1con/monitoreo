@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTelemetrySamplesRequest;
 use App\Models\AgentConnection;
 use App\Models\TelemetrySample;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 
 class TelemetryController extends Controller
@@ -18,7 +19,7 @@ class TelemetryController extends Controller
         $samples = collect($request->validated('samples'))
             ->map(fn (array $sample): array => [
                 'agent_connection_id' => $connection->id,
-                'captured_at' => $sample['captured_at'],
+                'captured_at' => Carbon::parse($sample['captured_at'])->utc()->format('Y-m-d H:i:s'),
                 'cpu_temperature_c' => $sample['cpu_temperature_c'] ?? null,
                 'gpu_temperature_c' => $sample['gpu_temperature_c'] ?? null,
                 'motherboard_temperature_c' => $sample['motherboard_temperature_c'] ?? null,

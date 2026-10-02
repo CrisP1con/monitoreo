@@ -25,7 +25,7 @@ class TelemetryApiTest extends TestCase
 
         $response = $this->withHeader('X-Diagnostics-Token', $token)->postJson('/api/diagnostics/telemetry', [
             'samples' => [[
-                'captured_at' => '2026-10-01T18:00:01Z',
+                'captured_at' => '2026-10-01T18:00:01.6891945+00:00',
                 'cpu_temperature_c' => 45,
                 'cpu_package_c' => 47,
                 'cpu_core_max_c' => 49,
